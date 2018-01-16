@@ -17,4 +17,9 @@
     <string name="menu_query">Query</string>
     <string name="menu_scenario">Scenario</string>
     <string name="menu_help">Help</string>
+
+    <string name="title">Title</string>
+    <string name="rightTitle">Right Title</string>
+    <string name="header">Header</string>
+    <string name="description">Description</string>
 </resources>

@@ -9,6 +9,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import fr.emse.com.cps2_android_app.adapter.ResultAdapter;
 
 public class ObjectsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +36,43 @@ public class ObjectsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ListView listView = (ListView) findViewById(R.id.listView);
+
+        //GET ARRAY OF JSON FROM DATABASE
+
+        ArrayList<JSONObject> jsonArray = new ArrayList<>();
+        JSONObject js1 = new JSONObject();
+        try {
+            js1.put("title","Objet 1");
+
+            js1.put("title2", "EF 1.12");
+            js1.put("header","16-01-2018 16:02");
+            js1.put("description","This object has scenario 'FIRE' up to date");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        jsonArray.add(js1);
+
+        JSONObject js2 = new JSONObject();
+
+        try {
+            js2.put("title", "Objet 2");
+
+            js2.put("title2", "158 E110");
+            js2.put("header", "16-01-2018 17:02");
+            js2.put("description", "This object has scenario 'PRINTER' up to date");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        jsonArray.add(js2);
+
+        ResultAdapter adapter = new ResultAdapter(ObjectsActivity.this,jsonArray);
+
+        listView.setAdapter(adapter);
+
     }
 
     @Override
