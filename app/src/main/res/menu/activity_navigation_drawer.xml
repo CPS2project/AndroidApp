@@ -7,19 +7,19 @@
         <item
             android:id="@+id/nav_objects"
             android:icon="@drawable/ic_devices_black_24dp"
-            android:title="Objects" />
+            android:title="@string/menu_objects" />
         <item
             android:id="@+id/nav_query"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="Query" />
+            android:title="@string/menu_query" />
         <item
             android:id="@+id/nav_scenario"
             android:icon="@drawable/ic_description_black_24dp"
-            android:title="Scenario" />
+            android:title="@string/menu_scenario" />
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_more_vert_black_24dp"
-            android:title="Help" />
+            android:title="@string/menu_help" />
     </group>
 
 </menu>
