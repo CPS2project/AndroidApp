@@ -1,5 +1,6 @@
 package fr.emse.com.cps2_android_app.network;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -9,5 +10,5 @@ import java.util.ArrayList;
  */
 
 public interface AsyncResponse {
-    void processFinish(ArrayList<JSONObject> output);
+    void processFinish(ArrayList<JSONObject> output) throws JSONException;
 }

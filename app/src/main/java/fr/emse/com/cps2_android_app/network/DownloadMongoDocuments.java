@@ -31,10 +31,13 @@ public class DownloadMongoDocuments extends AsyncTask<String, Integer, ArrayList
 
         // Insert the documents in a list to send to the adapter
         ArrayList<JSONObject> jsonArray = new ArrayList<>();
+        JSONObject json;
         MongoCursor<Document> cursor = collection.find().iterator();
         try {
             while (cursor.hasNext()) {
-                jsonArray.add(new JSONObject(cursor.next().toJson()));
+                json = new JSONObject(cursor.next().toJson());
+//                System.out.println(json);
+                jsonArray.add(json);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -45,7 +48,12 @@ public class DownloadMongoDocuments extends AsyncTask<String, Integer, ArrayList
     }
 
     @Override
-    protected void onPostExecute(ArrayList<JSONObject> jsonArray) {
-        delegate.processFinish(jsonArray);
+    protected void onPostExecute(ArrayList<JSONObject> output) {
+        try {
+            delegate.processFinish(output);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

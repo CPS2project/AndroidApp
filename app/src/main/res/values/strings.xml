@@ -22,4 +22,6 @@
     <string name="rightTitle">Right Title</string>
     <string name="header">Header</string>
     <string name="description">Description</string>
+
+    <string name="scenarioButton">Activate</string>
 </resources>

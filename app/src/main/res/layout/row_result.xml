@@ -7,13 +7,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="5dp">
 
         <TextView
             android:id="@+id/rowTitle"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:text="@string/title"
             android:textStyle="bold" />
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignBaseline="@+id/rowTitle"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/rowTitle"
             android:text="@string/rightTitle"
@@ -32,7 +32,7 @@
         <TextView
             android:id="@+id/rowHeader"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_alignLeft="@id/rowTitle"
             android:layout_below="@id/rowTitle"
