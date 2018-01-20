@@ -20,9 +20,9 @@ public class FakeObjectsArray {
         JSONObject json3 = null;
 
         try {
-            json1 = new JSONObject(obj1.replaceAll("\n", "\\n"));
-            json2 = new JSONObject(obj2.replaceAll("\n", "\\n"));
-            json3 = new JSONObject(obj3.replaceAll("\n", "\\n"));
+            json1 = new JSONObject(obj1);
+            json2 = new JSONObject(obj2);
+            json3 = new JSONObject(obj3);
         } catch (JSONException e) {
             e.printStackTrace();
         }

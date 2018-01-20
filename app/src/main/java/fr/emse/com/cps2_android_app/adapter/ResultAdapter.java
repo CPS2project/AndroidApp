@@ -48,7 +48,6 @@ public class ResultAdapter extends ArrayAdapter<JSONObject> {
         }
 
         JSONObject json = getItem(position);
-        System.out.println(json);
 
         try {
             viewHolder.rowTitle.setText( json.getJSONObject("object_name").getString("value"));
