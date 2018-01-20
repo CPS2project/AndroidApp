@@ -30,7 +30,6 @@ public class ResultAdapter extends ArrayAdapter<JSONObject> {
         Log.i("ResultAdapter","Construc OK");
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -41,46 +40,40 @@ public class ResultAdapter extends ArrayAdapter<JSONObject> {
         RowViewHolder viewHolder = (RowViewHolder) convertView.getTag();
         if (viewHolder == null){
             viewHolder = new RowViewHolder();
-            viewHolder.rowTitle = (TextView) convertView.findViewById(R.id.rowTitle);
-            viewHolder.rowLeftTitle = (TextView) convertView.findViewById(R.id.rowRightTitle);
-            viewHolder.rowHeader = (TextView) convertView.findViewById(R.id.rowHeader);
-            viewHolder.rowDescription = (TextView) convertView.findViewById(R.id.rowDescription);
+            viewHolder.rowTitle = convertView.findViewById(R.id.rowTitle);
+            viewHolder.rowLeftTitle = convertView.findViewById(R.id.rowRightTitle);
+            viewHolder.rowHeader = convertView.findViewById(R.id.rowHeader);
 
             convertView.setTag(viewHolder);
         }
 
-
         JSONObject json = getItem(position);
-
-
+        System.out.println(json);
 
         try {
-            viewHolder.rowTitle.setText( json.getString("title") );
-            viewHolder.rowLeftTitle.setText(json.getString("title2"));
-            viewHolder.rowHeader.setText( json.getString("header") );
-            viewHolder.rowDescription.setText(json.getString("description"));
+            viewHolder.rowTitle.setText( json.getJSONObject("object_name").getString("value"));
+            viewHolder.rowLeftTitle.setText(json.getJSONObject("object_type").getString("value"));
+            viewHolder.rowHeader.setText(String.format("%s - %s - %s",
+                    json.getJSONObject("building").getString("value"),
+                    json.getJSONObject("floor").getString("value"),
+                    json.getJSONObject("room").getString("value")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent objectInfoActivity = new Intent(ObjectInfoActivity.this, HelpActivity.class);
-                startActivity(objectInfoActivity);
-            }
-        });
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent objectInfoActivity = new Intent(ObjectInfoActivity.this, HelpActivity.class);
+//                startActivity(objectInfoActivity);
+//            }
+//        });
         return convertView;
     }
-
 
     public class RowViewHolder {
         public TextView rowTitle;
         public TextView rowLeftTitle;
         public TextView rowHeader;
-        public TextView rowDescription;
     }
-
-
-
 }

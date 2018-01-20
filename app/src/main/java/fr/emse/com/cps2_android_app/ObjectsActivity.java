@@ -17,16 +17,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import fr.emse.com.cps2_android_app.adapter.ResultAdapter;
+import fr.emse.com.cps2_android_app.fakeData.FakeObjectsArray;
+import fr.emse.com.cps2_android_app.network.AsyncResponse;
+import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
 
 public class ObjectsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AsyncResponse{
 
+    DownloadMongoDocuments asyncTask = new DownloadMongoDocuments();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_objects);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,42 +40,13 @@ public class ObjectsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        // The next two lines fill the listView with real data from MongoDB
+        asyncTask.delegate = this;
+        asyncTask.execute("objects");
 
-        //GET ARRAY OF JSON FROM DATABASE
-
-        ArrayList<JSONObject> jsonArray = new ArrayList<>();
-        JSONObject js1 = new JSONObject();
-        try {
-            js1.put("title","Objet 1");
-
-            js1.put("title2", "EF 1.12");
-            js1.put("header","16-01-2018 16:02");
-            js1.put("description","This object has scenario 'FIRE' up to date");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        jsonArray.add(js1);
-
-        JSONObject js2 = new JSONObject();
-
-        try {
-            js2.put("title", "Objet 2");
-
-            js2.put("title2", "158 E110");
-            js2.put("header", "16-01-2018 17:02");
-            js2.put("description", "This object has scenario 'PRINTER' up to date");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        jsonArray.add(js2);
-
-        ResultAdapter adapter = new ResultAdapter(ObjectsActivity.this,jsonArray);
-
-        listView.setAdapter(adapter);
-
+        // The next line fills the listView with fake data (offline test)
+//        this.processFinish(FakeObjectsArray.fakeObjectsArray());
+        // End of bloc
     }
 
     @Override
@@ -105,5 +79,12 @@ public class ObjectsActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void processFinish(ArrayList<JSONObject> jsonArray) {
+        ListView listView = findViewById(R.id.listView);
+        ResultAdapter adapter = new ResultAdapter(ObjectsActivity.this, jsonArray);
+        listView.setAdapter(adapter);
     }
 }
