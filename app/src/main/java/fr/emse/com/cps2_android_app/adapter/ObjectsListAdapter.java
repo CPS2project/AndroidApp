@@ -22,12 +22,12 @@ import fr.emse.com.cps2_android_app.R;
  * Created by Valentin on 16/01/2018.
  */
 
-public class ResultAdapter extends ArrayAdapter<JSONObject> {
+public class ObjectsListAdapter extends ArrayAdapter<JSONObject> {
 
 
-    public ResultAdapter(Context context, List list){
+    public ObjectsListAdapter(Context context, List list){
         super(context,0,list);
-        Log.i("ResultAdapter","Construc OK");
+        Log.i("ObjectsListAdapter","Construc OK");
     }
 
     @Override

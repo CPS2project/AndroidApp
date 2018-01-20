@@ -25,7 +25,7 @@ public class ScenarioListAdapter extends ArrayAdapter<JSONObject> {
 
     public ScenarioListAdapter(Context context, List list){
         super(context,0,list);
-        Log.i("ResultAdapter","Construc OK");
+        Log.i("ScenarioListAdapter","Construc OK");
     }
 
     @Override

@@ -8,15 +8,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import fr.emse.com.cps2_android_app.adapter.ResultAdapter;
-import fr.emse.com.cps2_android_app.fakeData.FakeObjectsArray;
+import fr.emse.com.cps2_android_app.adapter.ObjectsListAdapter;
 import fr.emse.com.cps2_android_app.network.AsyncResponse;
 import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
 
 public class ObjectsActivity extends NavigationHelperActivity
         implements AsyncResponse{
 
-    DownloadMongoDocuments asyncTask = new DownloadMongoDocuments();
+    private DownloadMongoDocuments asyncTask = new DownloadMongoDocuments();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class ObjectsActivity extends NavigationHelperActivity
     @Override
     public void processFinish(ArrayList<JSONObject> output) {
         ListView listView = findViewById(R.id.listView);
-        ResultAdapter adapter = new ResultAdapter(ObjectsActivity.this, output);
+        ObjectsListAdapter adapter = new ObjectsListAdapter(ObjectsActivity.this, output);
         listView.setAdapter(adapter);
     }
 }
