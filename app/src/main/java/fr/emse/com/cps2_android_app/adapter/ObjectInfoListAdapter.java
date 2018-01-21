@@ -49,16 +49,53 @@ public class ObjectInfoListAdapter extends ArrayAdapter<JSONObject> {
         viewHolder.rowTitle.setText("");
         viewHolder.rowLeftTitle.setText("");
         viewHolder.rowHeader.setText("");
-
+        String description ="";
+        String value = "";
+        String label = "";
+        String type = "";
+        String source = "";
 
         try {
-            viewHolder.rowTitle.setText(json.getString("label"));
-            viewHolder.rowLeftTitle.setText(json.getString("value"));
-            viewHolder.rowHeader.setText(json.getString("description"));
+            label = json.getString("label");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        try {
+            value = json.getString("value");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            description = json.getString("description");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            type = json.getString("type");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            source = json.getString("source");
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+
+
+        viewHolder.rowTitle.setText(label);
+        viewHolder.rowLeftTitle.setText(value);
+        viewHolder.rowHeader.setText(description);
+        if(!("").equals(type) && !("").equals(source)){
+            viewHolder.rowLeftTitle.setText(type + " — " + source);
+        }
+
+
 
         convertView.setOnClickListener(null);
         return convertView;

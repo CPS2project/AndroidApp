@@ -104,6 +104,8 @@ public class ObjectInfoActivity extends NavigationHelperActivity
                 jsonObjects.add(values.getJSONObject(jsonArray.get(i).toString()));
             }
 
+            System.out.println(jsonObjects.toString() + jsonObjects.get(0).getString("description"));
+
         }
 
         ObjectInfoListAdapter adapter = new ObjectInfoListAdapter(ObjectInfoActivity.this, jsonObjects);
