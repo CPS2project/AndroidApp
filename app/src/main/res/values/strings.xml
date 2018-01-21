@@ -24,4 +24,37 @@
     <string name="description">Description</string>
 
     <string name="scenarioButton">Activate</string>
+    <string name="targets">Targets</string>
+    <string name="select_1st_level">Select 1st level:</string>
+    <string name="select_2nd_level">Select 2nd level:</string>
+    <string name="select_3rd_level">Select 3rd level:</string>
+    <string name="select_4th_level">Select 4th level:</string>
+    <string name="select_5th_level">Select 5th level:</string>
+    <string name="action_title">Action</string>
+    <string name="request_button">Request</string>
+    <string name="change_button">Change</string>
+    <string name="config_button">Config</string>
+    <string name="field_button">Field</string>
+    <string name="parameter_name_message">Select the parameter or field name:</string>
+    <string name="response_title">Response</string>
+    <string name="button_send_request">Send</string>
+    <string name="help_objects_title">Objects</string>
+    <string name="help_objects_paragraph">This section shows the list of the objects that are registered in MongoDB.\nYou can click on an item
+        to display its details: you will see its general information such as its location and when it was last updated.
+        There are also the description of its configuration parameters and its fields that you can access by using the dropdown menu.</string>
+    <string name="help_query_title">Query</string>
+    <string name="help_query_paragraph">This section allows you to change or query a configuration parameter or a field.\n
+        You can chose precisely your targets, i.e. what group of objects you want to change or request the value. Be careful, for the moment the system
+        does not check the consistency of the group. As an example, if you select "Meteo Station" for the type and "EF" for the building, if there is no
+        Meteo Station in the building EF your message will be lost since no object has subscribed to this kind of topic. In the future the application
+        could query MongoDB after each choice in a dropdown menu so that it sends only messages for which there is a subscriber.
+    </string>
+    <string name="help_scenario_title">Scenario</string>
+    <string name="help_scenario_paragraph">This section allows you to activate a scenario stored in MongoDB.\n
+        You can select the name of a scenario in the dropdown menu. This will display the description of the scenario so that you can check what it will
+        do. Then just press the button "Activate" to send your command. The message will be received by the server which will get the corresponding
+        scenario in MongoDB and send its new state to each object of the scenario.
+    </string>
+    <string name="help_title">Help</string>
+    <string name="help_paragraph">Shows this page.</string>
 </resources>
