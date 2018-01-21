@@ -54,7 +54,7 @@ public class ObjectInfoListAdapter extends ArrayAdapter<JSONObject> {
         try {
             viewHolder.rowTitle.setText(json.getString("label"));
             viewHolder.rowLeftTitle.setText(json.getString("value"));
-
+            viewHolder.rowHeader.setText(json.getString("description"));
 
         } catch (JSONException e) {
             e.printStackTrace();

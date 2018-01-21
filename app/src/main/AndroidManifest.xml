@@ -33,7 +33,8 @@
             android:name="QueryActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".ObjectInfoActivity"/>
+        <activity android:name=".ObjectInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
             android:name="ScenarioActivity"

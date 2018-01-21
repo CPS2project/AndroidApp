@@ -5,8 +5,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.emse.com.cps2_android_app.ScenarioActivity"
     android:fitsSystemWindows="true"
+    tools:context="fr.emse.com.cps2_android_app.ScenarioActivity"
     tools:openDrawer="start">
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -62,9 +62,10 @@
 
             <ListView
                 android:id="@+id/objectInfoListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/spinner_obj_info" />
@@ -73,6 +74,6 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <include layout="@layout/navigation"/>
+    <include layout="@layout/navigation" />
 
 </android.support.v4.widget.DrawerLayout>

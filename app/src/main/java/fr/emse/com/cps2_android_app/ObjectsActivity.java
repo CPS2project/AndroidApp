@@ -20,24 +20,18 @@ import fr.emse.com.cps2_android_app.fakeData.FakeObjectsArray;
 import fr.emse.com.cps2_android_app.network.AsyncResponse;
 import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
 
-public class ObjectsActivity extends AppCompatActivity
+public class ObjectsActivity extends NavigationHelperActivity
         implements NavigationView.OnNavigationItemSelectedListener, AsyncResponse{
 
     DownloadMongoDocuments asyncTask = new DownloadMongoDocuments();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_objects);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        super.onCreate(savedInstanceState);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_objects);
 
         /* The next two lines fill the listView with real data from MongoDB
         asyncTask.delegate = this;
