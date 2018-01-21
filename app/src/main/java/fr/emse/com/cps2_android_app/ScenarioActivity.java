@@ -22,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import fr.emse.com.cps2_android_app.adapter.ScenarioListAdapter;
+import fr.emse.com.cps2_android_app.fakeData.FakeScenariosArray;
 import fr.emse.com.cps2_android_app.network.AsyncResponse;
 import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
 import fr.emse.com.cps2_android_app.network.MqttConnector;
@@ -47,15 +48,15 @@ public class ScenarioActivity extends NavigationHelperActivity
         this.spinner.setOnItemSelectedListener(this);
 
         // The next two lines fill the listView with real data from MongoDB
-        asyncTask.delegate = this;
-        asyncTask.execute("scenarios");
+        //asyncTask.delegate = this;
+        //asyncTask.execute("scenarios");
 
         // The next bloc fills the listView with fake data (offline test)
-//        try {
-//            this.processFinish(FakeScenariosArray.fakeScenariosArray());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            this.processFinish(FakeScenariosArray.fakeScenariosArray());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         final MqttAndroidClient mqttClient = MqttConnector.createMqttClient(this);
 
