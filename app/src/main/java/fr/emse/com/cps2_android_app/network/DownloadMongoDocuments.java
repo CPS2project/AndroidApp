@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class DownloadMongoDocuments extends AsyncTask<String, Integer, ArrayList<JSONObject>> {
 
-    public AsyncResponse delegate = null;
+    public JsonAsyncResponse delegate = null;
 
     @Override
     protected ArrayList<JSONObject> doInBackground(String... strings) {

@@ -22,12 +22,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import fr.emse.com.cps2_android_app.adapter.ScenarioListAdapter;
-import fr.emse.com.cps2_android_app.network.AsyncResponse;
+import fr.emse.com.cps2_android_app.network.JsonAsyncResponse;
 import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
 import fr.emse.com.cps2_android_app.network.MqttConnector;
 
 public class ScenarioActivity extends NavigationHelperActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AsyncResponse, AdapterView.OnItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, JsonAsyncResponse, AdapterView.OnItemSelectedListener {
 
     private DownloadMongoDocuments asyncTask = new DownloadMongoDocuments();
     private Spinner spinner = null;

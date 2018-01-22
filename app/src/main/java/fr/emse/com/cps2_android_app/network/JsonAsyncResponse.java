@@ -9,6 +9,6 @@ import java.util.ArrayList;
  * Created by julien on 19/01/18.
  */
 
-public interface AsyncResponse {
+public interface JsonAsyncResponse {
     void processFinish(ArrayList<JSONObject> output) throws JSONException;
 }

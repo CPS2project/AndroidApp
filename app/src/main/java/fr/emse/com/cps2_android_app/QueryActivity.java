@@ -10,11 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONArray;
@@ -24,13 +21,12 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import fr.emse.com.cps2_android_app.fakeData.FakeObjectsArray;
-import fr.emse.com.cps2_android_app.network.AsyncResponse;
+import fr.emse.com.cps2_android_app.network.JsonAsyncResponse;
 import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
 import fr.emse.com.cps2_android_app.network.MqttConnector;
 
 
-public class QueryActivity extends NavigationHelperActivity implements AsyncResponse {
+public class QueryActivity extends NavigationHelperActivity implements JsonAsyncResponse {
 
     private ArrayList<String> buildingData = new ArrayList<>();
     private ArrayList<String> floorData = new ArrayList<>();
@@ -71,15 +67,21 @@ public class QueryActivity extends NavigationHelperActivity implements AsyncResp
         boolean checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.radioButtonField:
-                if (checked)
+        if (checked){
+            switch(view.getId()) {
+                case R.id.radioButtonField:
                     this.updateParameterSpinner("fields");
                     break;
-            case R.id.radioButtonConfig:
-                if (checked)
+                case R.id.radioButtonConfig:
                     this.updateParameterSpinner("config");
                     break;
+                case R.id.radioButtonRequest:
+                    ((TextView) findViewById(R.id.newValue)).setEnabled(false);
+                    break;
+                case R.id.radioButtonChange:
+                    ((TextView) findViewById(R.id.newValue)).setEnabled(true);
+                    break;
+            }
         }
     }
 
@@ -121,9 +123,16 @@ public class QueryActivity extends NavigationHelperActivity implements AsyncResp
         String parameterLabel = ((Spinner) findViewById(R.id.parameterNameSpinner)).getSelectedItem().toString();
 
         // We must get the name of the selected parameter and not its displayed label
-        String clientId = this.mqttClient.getClientId();
         String parameterName = this.getParameterNameFromLabel(parameterLabel);
-        String payload = String.format("%s,%s,%s", parameterType, parameterName, clientId);
+        String clientId = this.mqttClient.getClientId();
+        String payload = String.format("%s,%s", parameterType, parameterName);
+        if (((RadioButton) findViewById(R.id.radioButtonRequest)).isChecked()){
+            // This is a request. The third element of the message is the client ID
+            payload += "," + clientId;
+        } else {
+            // This is a change command. The third element of the message is the new value
+            payload += "," + ((TextView) findViewById(R.id.newValue)).getText();
+        }
 
         System.out.println("### message: " + payload);
 

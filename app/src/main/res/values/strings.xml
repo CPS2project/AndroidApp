@@ -57,4 +57,5 @@
     </string>
     <string name="help_title">Help</string>
     <string name="help_paragraph">Shows this page.</string>
+    <string name="new_value">New value</string>
 </resources>
