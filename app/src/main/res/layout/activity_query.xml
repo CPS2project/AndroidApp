@@ -50,7 +50,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/titleTarget" />
 
                 <Spinner
-                    android:id="@+id/firstLevelSpinner"
+                    android:id="@+id/buildingSpinner"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="50dp"
@@ -68,10 +68,10 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/select_2nd_level"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/firstLevelSpinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/buildingSpinner" />
 
                 <Spinner
-                    android:id="@+id/secondLevelSpinner"
+                    android:id="@+id/floorSpinner"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="50dp"
@@ -89,10 +89,10 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/select_3rd_level"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/secondLevelSpinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/floorSpinner" />
 
                 <Spinner
-                    android:id="@+id/thirdLevelSpinner"
+                    android:id="@+id/roomSpinner"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="50dp"
@@ -110,10 +110,10 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/select_4th_level"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/thirdLevelSpinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/roomSpinner" />
 
                 <Spinner
-                    android:id="@+id/fourthLevelSpinner"
+                    android:id="@+id/objectTypeSpinner"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="50dp"
@@ -131,10 +131,10 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/select_5th_level"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fourthLevelSpinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/objectTypeSpinner" />
 
                 <Spinner
-                    android:id="@+id/fifthLevelSpinner"
+                    android:id="@+id/objectNameSpinner"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="50dp"
@@ -157,7 +157,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fifthLevelSpinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/objectNameSpinner" />
 
                 <RadioGroup
                     android:id="@+id/requestTypeGroup"
@@ -168,6 +168,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/titleAction">
                     <RadioButton
                         android:id="@+id/radioButtonRequest"
+                        android:checked="true"
                         android:layout_width="108dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="68dp"
@@ -192,6 +193,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/requestTypeGroup">
                     <RadioButton
                         android:id="@+id/radioButtonConfig"
+                        android:onClick="onRadioButtonClicked"
+                        android:checked="true"
                         android:layout_width="108dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="68dp"
@@ -202,6 +205,7 @@
 
                     <RadioButton
                         android:id="@+id/radioButtonField"
+                        android:onClick="onRadioButtonClicked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="52dp"
@@ -231,10 +235,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/parameterTypeGroup" />
+                    app:layout_constraintTop_toBottomOf="@id/parameterNameText" />
 
                 <Button
                     android:id="@+id/buttonSendRequest"
+                    android:onClick="onSendingButtonClicked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -260,15 +265,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/buttonSendRequest" />
 
-                <ListView
-                    android:id="@+id/listView"
+                <TextView
+                    android:id="@+id/responses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
+                    android:text=""
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleResponse">
-                </ListView>
+                    app:layout_constraintTop_toBottomOf="@+id/titleResponse" />
 
             </android.support.constraint.ConstraintLayout>
         </ScrollView>
@@ -289,6 +296,6 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <!--<include layout="@layout/navigation"/>-->
+    <include layout="@layout/navigation"/>
 
 </android.support.v4.widget.DrawerLayout>

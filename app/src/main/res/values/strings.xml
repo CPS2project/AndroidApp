@@ -25,11 +25,11 @@
 
     <string name="scenarioButton">Activate</string>
     <string name="targets">Targets</string>
-    <string name="select_1st_level">Select 1st level:</string>
-    <string name="select_2nd_level">Select 2nd level:</string>
-    <string name="select_3rd_level">Select 3rd level:</string>
-    <string name="select_4th_level">Select 4th level:</string>
-    <string name="select_5th_level">Select 5th level:</string>
+    <string name="select_1st_level">Select a building:</string>
+    <string name="select_2nd_level">Select a floor:</string>
+    <string name="select_3rd_level">Select a room:</string>
+    <string name="select_4th_level">Select a type:</string>
+    <string name="select_5th_level">Select a name:</string>
     <string name="action_title">Action</string>
     <string name="request_button">Request</string>
     <string name="change_button">Change</string>

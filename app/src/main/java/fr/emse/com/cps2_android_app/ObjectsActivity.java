@@ -33,13 +33,12 @@ public class ObjectsActivity extends NavigationHelperActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_objects);
 
-        /* The next two lines fill the listView with real data from MongoDB
+        // The next two lines fill the listView with real data from MongoDB
         asyncTask.delegate = this;
-        asyncTask.execute("objects");*/
+        asyncTask.execute("objects");
 
         // The next line fills the listView with fake data (offline test)
-        this.processFinish(FakeObjectsArray.fakeObjectsArray());
-        // End of bloc
+//        this.processFinish(FakeObjectsArray.fakeObjectsArray());
     }
 
     @Override
