@@ -9,6 +9,9 @@ import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -18,10 +21,28 @@ import static android.content.ContentValues.TAG;
 public class MqttConnector {
 
     public static MqttAndroidClient createMqttClient(Activity activity){
+
+        MqttAndroidClient client = null;
+        String mqtt_host;
+
+        // Try to read the MQTT host in the file "hosts"
+        try {
+            FileInputStream fin = activity.getApplicationContext().openFileInput("hosts");
+            int c;
+            String temp = "";
+            while ((c = fin.read()) != -1) {
+                temp = temp + Character.toString((char) c);
+            }
+            mqtt_host = temp.contains(";") ? temp.split(";")[0] : temp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return client;
+        }
+
         final String clientId = MqttClient.generateClientId();
-        MqttAndroidClient client =
-                new MqttAndroidClient(activity.getApplicationContext(), "tcp://192.168.43.48:1883",
-                        clientId);
+        client = new MqttAndroidClient(activity.getApplicationContext(),
+                "tcp://" + mqtt_host + ":1883",
+                clientId);
 
         try {
             IMqttToken token = client.connect();

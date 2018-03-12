@@ -3,6 +3,7 @@ package fr.emse.com.cps2_android_app.network;
 import android.os.AsyncTask;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoTimeoutException;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -24,25 +25,31 @@ public class DownloadMongoDocuments extends AsyncTask<String, Integer, ArrayList
 
     @Override
     protected ArrayList<JSONObject> doInBackground(String... strings) {
+        ArrayList<JSONObject> jsonArray = new ArrayList<>();
+
         // Get the JSON documents from MongoDB
-        MongoClient mongoClient = new MongoClient(new ServerAddress("192.168.43.48", 27017));
+        MongoClient mongoClient = new MongoClient(new ServerAddress(strings[1], 27017));
         MongoDatabase database = mongoClient.getDatabase("cps2_project");
         MongoCollection<Document> collection = database.getCollection(strings[0]);
 
         // Insert the documents in a list to send to the adapter
-        ArrayList<JSONObject> jsonArray = new ArrayList<>();
         JSONObject json;
-        MongoCursor<Document> cursor = collection.find().iterator();
+        MongoCursor<Document> cursor = null;
         try {
+            cursor = collection.find().iterator();
             while (cursor.hasNext()) {
                 json = new JSONObject(cursor.next().toJson());
 //                System.out.println(json);
                 jsonArray.add(json);
             }
+        } catch (MongoTimeoutException e) {
+            // Most likely the application is not connected to the server. We return the empty json array.
+            return jsonArray;
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
-            cursor.close();
+            if (cursor != null)
+                cursor.close();
         }
         return jsonArray;
     }

@@ -40,6 +40,10 @@
             android:name="ScenarioActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity
+            android:name="SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

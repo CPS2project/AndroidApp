@@ -18,11 +18,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import fr.emse.com.cps2_android_app.network.JsonAsyncResponse;
 import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
+import fr.emse.com.cps2_android_app.network.JsonAsyncResponse;
 import fr.emse.com.cps2_android_app.network.MqttConnector;
 
 
@@ -51,9 +53,23 @@ public class QueryActivity extends NavigationHelperActivity implements JsonAsync
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_query);
 
-        // The next two lines fill the listView with real data from MongoDB
-        asyncTask.delegate = this;
-        asyncTask.execute("objects");
+        // Try to read the MongoDB host in the hosts file
+        try {
+            FileInputStream fin = openFileInput("hosts");
+            int c;
+            String temp = "";
+            while ((c = fin.read()) != -1) {
+                temp = temp + Character.toString((char) c);
+            }
+
+            // If succeed, get the objects from MongoDB using the retrieved IP address.
+            String mongo_host = temp.contains(";") ? temp.split(";")[1] : temp;
+            asyncTask.delegate = this;
+            asyncTask.execute("objects", mongo_host);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // The next line fills the listView with fake data (offline test)
 //        this.processFinish(FakeObjectsArray.fakeObjectsArray());
@@ -76,10 +92,10 @@ public class QueryActivity extends NavigationHelperActivity implements JsonAsync
                     this.updateParameterSpinner("config");
                     break;
                 case R.id.radioButtonRequest:
-                    ((TextView) findViewById(R.id.newValue)).setEnabled(false);
+                    findViewById(R.id.newValue).setEnabled(false);
                     break;
                 case R.id.radioButtonChange:
-                    ((TextView) findViewById(R.id.newValue)).setEnabled(true);
+                    findViewById(R.id.newValue).setEnabled(true);
                     break;
             }
         }

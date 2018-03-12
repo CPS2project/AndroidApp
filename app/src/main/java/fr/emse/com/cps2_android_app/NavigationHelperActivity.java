@@ -48,8 +48,8 @@ public abstract class NavigationHelperActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_objects) {
-            Intent helpActivity = new Intent(this, ObjectsActivity.class);
-            startActivity(helpActivity);
+            Intent objectsActivity = new Intent(this, ObjectsActivity.class);
+            startActivity(objectsActivity);
         } else if (id == R.id.nav_query) {
             Intent queryActivity = new Intent(this, QueryActivity.class);
             startActivity(queryActivity);
@@ -57,8 +57,11 @@ public abstract class NavigationHelperActivity extends AppCompatActivity
             Intent scenarioActivity = new Intent(this, ScenarioActivity.class);
             startActivity(scenarioActivity);
         } else if (id == R.id.nav_help) {
-            Intent scenarioActivity = new Intent(this, HelpActivity.class);
-            startActivity(scenarioActivity);
+            Intent helpActivity = new Intent(this, HelpActivity.class);
+            startActivity(helpActivity);
+        } else if (id == R.id.nav_settings) {
+            Intent settingsActivity = new Intent(this, SettingsActivity.class);
+            startActivity(settingsActivity);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

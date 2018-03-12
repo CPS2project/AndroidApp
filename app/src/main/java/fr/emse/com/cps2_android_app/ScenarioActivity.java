@@ -18,12 +18,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import fr.emse.com.cps2_android_app.adapter.ScenarioListAdapter;
-import fr.emse.com.cps2_android_app.network.JsonAsyncResponse;
 import fr.emse.com.cps2_android_app.network.DownloadMongoDocuments;
+import fr.emse.com.cps2_android_app.network.JsonAsyncResponse;
 import fr.emse.com.cps2_android_app.network.MqttConnector;
 
 public class ScenarioActivity extends NavigationHelperActivity
@@ -46,9 +48,23 @@ public class ScenarioActivity extends NavigationHelperActivity
         this.spinner = findViewById(R.id.spinner);
         this.spinner.setOnItemSelectedListener(this);
 
-        // The next two lines fill the listView with real data from MongoDB
-        asyncTask.delegate = this;
-        asyncTask.execute("scenarios");
+        // Try to read the MongoDB host in the hosts file
+        try {
+            FileInputStream fin = openFileInput("hosts");
+            int c;
+            String temp = "";
+            while ((c = fin.read()) != -1) {
+                temp = temp + Character.toString((char) c);
+            }
+
+            // If succeed, get the objects from MongoDB using the retrieved IP address.
+            String mongo_host = temp.contains(";") ? temp.split(";")[1] : temp;
+            asyncTask.delegate = this;
+            asyncTask.execute("scenarios", mongo_host);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // The next bloc fills the listView with fake data (offline test)
 //        try {
